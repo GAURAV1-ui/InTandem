@@ -29,7 +29,6 @@ const DraggleMarker = ({ onAddRemark, selectedPosition }) => {
             const marker = markerRef.current;
             if (marker) {
                 marker.setLatLng(selectedPosition);
-                // marker.openPopup();
             }
         }
     }, [selectedPosition]);

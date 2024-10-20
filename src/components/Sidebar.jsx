@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { RxHamburgerMenu, RxCross2 } from "react-icons/rx";
-import { CiChat1 } from "react-icons/ci";
 import { SlLocationPin } from "react-icons/sl";
 
 export default function Sidebar({ remarkHistory, onSelectRemark }) {
