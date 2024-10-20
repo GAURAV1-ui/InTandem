@@ -15,7 +15,6 @@ const DraggleMarker = ({ onAddRemark}) => {
                 const marker = markerRef.current;
                 if (marker != null) {
                     const newPosition = marker.getLatLng();
-                    console.log(newPosition, "newPosition");
                     setPosition(newPosition);
                     marker.openPopup();
                 }

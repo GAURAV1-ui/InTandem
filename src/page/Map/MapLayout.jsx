@@ -11,7 +11,6 @@ const MapLayout = ({ onAddRemark, selectedPosition }) => {
     if (mapRef.current && selectedPosition) {
       mapRef.current.setView(selectedPosition);
     }
-    console.log(selectedPosition, "selectedPosition");
   }, [selectedPosition]);
 
   return (
@@ -26,7 +25,7 @@ const MapLayout = ({ onAddRemark, selectedPosition }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <DraggleMarker onAddRemark={onAddRemark}/>
+      <DraggleMarker onAddRemark={onAddRemark} selectedPosition={selectedPosition}/>
     </MapContainer>
   );
 };
