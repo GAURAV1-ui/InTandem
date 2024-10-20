@@ -1,9 +1,9 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo, useEffect } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import MarkerPopup from '../../components/MarkerPopup';
 import useFetchAddress from '../../hook/useFetchAddress';
 
-const DraggleMarker = ({ onAddRemark}) => {
+const DraggleMarker = ({ onAddRemark, selectedPosition }) => {
     const [position, setPosition] = useState({ lat: 51.505, lng: -0.09 });
     const [markerData, setMarkerData] = useState({ address: "", remark: "", date: "" });
     const markerRef = useRef(null);
@@ -22,6 +22,17 @@ const DraggleMarker = ({ onAddRemark}) => {
         }),
         [],
     );
+
+    useEffect(() => {
+        if (selectedPosition) {
+            setPosition(selectedPosition);
+            const marker = markerRef.current;
+            if (marker) {
+                marker.setLatLng(selectedPosition);
+                // marker.openPopup();
+            }
+        }
+    }, [selectedPosition]);
 
     const handleRemark = (remark) => {
         const currentDate = new Date().toLocaleString();

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { RxHamburgerMenu, RxCross2 } from "react-icons/rx";
 import { CiChat1 } from "react-icons/ci";
+import { SlLocationPin } from "react-icons/sl";
 
 export default function Sidebar({ remarkHistory, onSelectRemark }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -33,6 +34,7 @@ export default function Sidebar({ remarkHistory, onSelectRemark }) {
         </div>
 
         <div className="p-2.5 mt-3 text-gray-200">
+        
           <h2 className="font-bold">Remark History</h2>
           {remarkHistory.map((remark, index) => (
             <div
@@ -40,7 +42,7 @@ export default function Sidebar({ remarkHistory, onSelectRemark }) {
               className="p-2.5 my-2 flex items-center rounded-md duration-300 cursor-pointer hover:bg-blue-600 text-white"
               onClick={() => onSelectRemark(remark)}
             >
-              <CiChat1 />
+              <SlLocationPin />
               <span className="text-[15px] ml-4">{remark.remark}</span>
             </div>
           ))}
