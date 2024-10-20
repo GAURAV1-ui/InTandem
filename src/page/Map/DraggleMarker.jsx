@@ -3,11 +3,10 @@ import { Marker, Popup } from 'react-leaflet';
 import MarkerPopup from '../../components/MarkerPopup';
 import useFetchAddress from '../../hook/useFetchAddress';
 
-const DraggleMarker = () => {
+const DraggleMarker = ({ onAddRemark}) => {
     const [position, setPosition] = useState({ lat: 51.505, lng: -0.09 });
     const [markerData, setMarkerData] = useState({ address: "", remark: "", date: "" });
     const markerRef = useRef(null);
-
     const { address, loading, error } = useFetchAddress(position);
 
     const eventHandlers = useMemo(
@@ -16,6 +15,7 @@ const DraggleMarker = () => {
                 const marker = markerRef.current;
                 if (marker != null) {
                     const newPosition = marker.getLatLng();
+                    console.log(newPosition, "newPosition");
                     setPosition(newPosition);
                     marker.openPopup();
                 }
@@ -26,21 +26,10 @@ const DraggleMarker = () => {
 
     const handleRemark = (remark) => {
         const currentDate = new Date().toLocaleString();
-        const newMarkerData = { 
-            remark, 
-            date: currentDate, 
-            address, 
-            latitude: position.lat,
-            longitude: position.lng
-        };
-    
-        const existingData = JSON.parse(localStorage.getItem("markerData")) || [];
-        existingData.push(newMarkerData);
-    
-        localStorage.setItem("markerData", JSON.stringify(existingData));
-    
+        const newMarkerData = { remark, date: currentDate, address, position };
+        onAddRemark(newMarkerData);
+
         setMarkerData(newMarkerData);
-    
         markerRef.current.closePopup();
     };
 
